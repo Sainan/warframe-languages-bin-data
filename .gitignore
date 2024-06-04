@@ -1,1 +1,3 @@
-*.lnk
+**
+!.gitignore
+!dict.json
