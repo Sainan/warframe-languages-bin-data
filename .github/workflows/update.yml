@@ -1,0 +1,22 @@
+name: Update
+on:
+  workflow_dispatch: {}
+jobs:
+  update:
+    runs-on: [debian-10]
+    steps:
+      - run: rm -rf warframe-languages-bin-data warframe-cache-tools
+      - name: Do the thing with the thing
+        run: |
+          git clone https://github.com/calamity-inc/warframe-languages-bin-data
+          git clone https://github.com/Sainan/warframe-cache-tools
+          cd warframe-languages-bin-data
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          chmod +x ../warframe-cache-tools/pluto
+          ../warframe-cache-tools/pluto _update.pluto
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          directory: warframe-languages-bin-data

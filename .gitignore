@@ -1,5 +1,6 @@
-**
-!.gitattributes
-!.gitignore
+Cache.Windows/
+Extracted/
+*.bat
+*.pluto
 !_download_and_extract.pluto
-!*.json
+!_update.pluto
