@@ -1,3 +1,3 @@
 dofile("_download_and_extract.pluto")
 os.execute("git add .")
-os.execute("git commit -m "..require"http".request("https://conduit.browse.wf/current-version"))
+os.execute("git commit -m \""..require"http".request("https://conduit.browse.wf/current-version").."\"")
