@@ -5,10 +5,6 @@ download_file("/H.Cache.bin", TYPE_MANIFEST)
 local meta_manifest = new CacheManifest("/H.Cache.bin")
 print("Cache manifest hash: "..b64m_encode(meta_manifest:getHash("/B.Cache.Windows.bin")))
 
-io.mkdir("raw")
-io.mkdir("raw/0")
-local hashes = io.open("raw/hashes.txt", "w")
-
 for { "en", "de", "es", "fr", "it", "ja", "ko", "pl", "pt", "ru", "tc", "th", "tr", "uk", "zh" } as lang do
 	meta_manifest:downloadFile("/B.Cache.Windows_"..lang..".bin", TYPE_MANIFEST)
 	local lang_manifest = new CacheManifest("/B.Cache.Windows_"..lang..".bin")
@@ -21,10 +17,4 @@ for { "en", "de", "es", "fr", "it", "ja", "ko", "pl", "pt", "ru", "tc", "th", "t
 		require"json".encode(entries, true)
 			--:replace("\n    \"", "\r\n  \"")
 	)
-
-	io.mkdir("raw/0_"..lang)
-	io.copy(get_local_path("/B.Cache.Windows_"..lang..".bin") .. "_H", "raw/0/B.Cache.Windows_"..lang..".bin_H")
-	io.copy(get_local_path("/Languages.bin", "_"..lang) .. "_H", "raw/0_"..lang.."/Languages.bin_H")
-	hashes:write("0/B.Cache.Windows_"..lang..".bin!"..string.format("%X", TYPE_MANIFEST).."_"..b64m_encode(meta_manifest:getHash("/B.Cache.Windows_"..lang..".bin")).."\n")
-	hashes:write("0_"..lang.."/Languages.bin!"..string.format("%X", TYPE_BIN).."_"..b64m_encode(lang_manifest:getHash("/Languages.bin")).."\n")
 end
