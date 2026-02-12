@@ -6,10 +6,10 @@ jobs:
     runs-on: [debian-10]
     steps:
       - run: rm -rf warframe-languages-bin-data warframe-cache-tools
-      - name: Do the thing with the thing
+      - run: git clone https://github.com/calamity-inc/warframe-languages-bin-data
+      - run: git clone https://github.com/Sainan/warframe-cache-tools
+      - name: Run _update.pluto
         run: |
-          git clone https://github.com/calamity-inc/warframe-languages-bin-data
-          git clone https://github.com/Sainan/warframe-cache-tools
           cd warframe-languages-bin-data
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
